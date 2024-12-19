@@ -1,0 +1,47 @@
+FROM debian:buster-slim
+
+# curl
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y postgresql-client curl gettext-base && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# ca-certificates-java
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends openjdk-11-jdk-headless ca-certificates-java && \
+    /var/lib/dpkg/info/ca-certificates-java.postinst configure && \
+    apt-get install -y --no-install-recommends openjdk-11-jdk && \
+    rm -rf /var/lib/apt/lists/*
+
+
+
+# Script zum Erzeugen 2 Postgre User DB_APP_ADMIN_USER und DB_APP_USER für diesen Service \
+ADD src/main/resources/db-schema/init_users.sql /
+ADD src/main/resources/db-schema/update_users.sql /
+RUN sed -i 's/\r$//' init_users.sql && sed -i 's/\r$//' update_users.sql
+
+ADD entrypoint_InitContainer.sh /
+RUN sed -i 's/\r$//' entrypoint_InitContainer.sh && chmod +x entrypoint_InitContainer.sh
+
+# Datenbank-Initialisierung/Migration via Liquibase
+# Setup basiert auf https://github.com/liquibase/docker/blob/master/Dockerfile
+RUN adduser liquibase && \
+    mkdir /liquibase && chown liquibase /liquibase
+
+WORKDIR /liquibase
+
+USER liquibase
+ARG LIQUIBASE_VERSION=4.30.0
+ARG POSTGRES_VERSION=42.7.4
+RUN set -x && \
+    curl -L https://github.com/liquibase/liquibase/releases/download/v${LIQUIBASE_VERSION}/liquibase-${LIQUIBASE_VERSION}.tar.gz | tar -xzf - && \
+    curl -o /liquibase/lib/postgresql.jar https://repo1.maven.org/maven2/org/postgresql/postgresql/${POSTGRES_VERSION}/postgresql-${POSTGRES_VERSION}.jar
+
+COPY src/main/resources/db-schema/changelog /liquibase/changelog
+#COPY src/main/resources/db-schema/changelog/sequences.sql /liquibase/changelog/sequences.sql
+
+ENTRYPOINT ["/entrypoint_InitContainer.sh"]
+
+
+
+
