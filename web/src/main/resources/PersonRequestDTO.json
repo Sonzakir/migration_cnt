@@ -1,0 +1,29 @@
+{
+  "vorname": "Max",
+  "nachname": "Musterman",
+  "adresse": [
+    {
+      "strasse": "Musterstr.",
+      "hausNo": "1",
+      "plz": "44673",
+      "stadt": "Berlin",
+      "bundesland": "Berlin"
+    }
+  ],
+  "kontaktList": [
+    {
+      "festnetznummer": [
+        "02348967564"
+      ],
+      "email": [
+        "maxmustermann@gamil.com"
+      ],
+      "webseite": [
+        "www.maxmusterman.com"
+      ],
+      "mobilnummern": [
+        "01745674423"
+      ]
+    }
+  ]
+}

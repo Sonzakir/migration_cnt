@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="1" author="FKIRAZ">
+        <sqlFile path="sequences.sql" relativeToChangelogFile="true"/>
+        <comment>Datenbanksequenz Definitionen</comment>
+    </changeSet>
+    <changeSet id="2" author="FKIRAZ">
+        <sqlFile path="initAdresse.sql" relativeToChangelogFile="true"/>
+        <comment>Setzt die Adressentabelle auf.</comment>
+    </changeSet>
+    <changeSet id="3" author="FKIRAZ">
+        <sqlFile path="initPersonen.sql" relativeToChangelogFile="true"/>
+        <comment>Setzt die Personentabelle auf.</comment>
+    </changeSet>
+    <changeSet id="4" author="FKIRAZ">
+        <sqlFile path="initFirmen.sql" relativeToChangelogFile="true"/>
+        <comment>Setzt die Firmentabelle auf.</comment>
+    </changeSet>
+    <changeSet id="5" author="FKIRAZ">
+        <sqlFile path="entferne_strasse.sql" relativeToChangelogFile="true"/>
+        <comment>Setzt die Name der Column strasse auf str. .</comment>
+    </changeSet>
+</databaseChangeLog>

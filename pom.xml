@@ -9,6 +9,9 @@
 
   <!--CHILD POMS-->
   <modules>
+    <module>service</module>
+    <module>model</module>
+    <module>repository</module>
     <module>web</module>
   </modules>
 

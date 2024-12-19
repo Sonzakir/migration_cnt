@@ -1,0 +1,28 @@
+{
+  "name": [ "Friedrich"],
+  "nachname": ["schmier"],
+  "adresse": [
+    {
+      "strasse": "str3",
+      "hausNo": "7",
+      "plz": "80336",
+      "stadt": "München",
+      "bundesland": "Bayern"
+    }
+  ],
+
+  "kontaktList": [
+    {
+      "festnetznummer": [
+        "2222222"
+      ] ,
+      "email": [
+        "1234555"
+
+      ],
+      "webseite": [ "http://($%(§$/%§($%.de" , "iuwehsgjajdkfg.com" ]
+    ,
+      "mobilnummern": ["2828282882","93939399"]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+
+  "name":
+    "5555555"
+  ,
+  "adresse": [
+    {
+
+      "strasse": "kuhlenko",
+      "hausNo": "3",
+      "plz": "4465",
+      "stadt": "BERLIN",
+      "bundesland": "berlin"
+    }
+  ],
+  "branche": [
+    "APOTHEKE" , "SOFTWARE"
+  ],
+  "kontaktList": [
+    {
+      "festnetznummer" : ["0238488484"],
+      "email":["email@gmail.com"],
+      "webseite":["webseite.com"],
+      "faxnummer" : [
+        "01223040"
+      ]
+    }
+  ]
+}

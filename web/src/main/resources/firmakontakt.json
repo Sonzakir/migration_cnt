@@ -1,0 +1,22 @@
+
+{
+    "festnetzNummer": [
+        {
+            "festnetznummer": "12313423"
+        }
+    ],
+    "email": [
+        {
+            "email": "email@email.com"
+        }
+    ],
+    "webSeite": [],
+    "faxNummern": [
+        {
+            "faxnummer": "6666666"
+        },
+        {
+            "faxnummer": "5555555"
+        }
+    ]
+}
