@@ -74,7 +74,7 @@ services:
     build:
       context: C:\Users\fkiraz\Documents\Angular_Projects\UI-DE-TELEFONBUCH
     ports:
-      - "4200:4200"  #:80
+      - "4200:4200"
     depends_on:
       - java_app
 
