@@ -14,16 +14,14 @@
 
 FROM maven:3.8.5-openjdk-17 AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy the full project
 COPY . .
 
-# Build the entire project
+# root projekt
 RUN mvn clean install -DskipTests
 
-# Build the web project
+# web projekt
 RUN mvn clean package -DskipTests -pl web -am
 
 # Use a lightweight JDK image to run the application
