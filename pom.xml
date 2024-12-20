@@ -9,7 +9,7 @@
 
   <!--CHILD POMS-->
   <modules>
-    <module>web</module>
+    <module>web-starter</module>
     <module>model</module>
     <module>repository</module>
     <module>service</module>

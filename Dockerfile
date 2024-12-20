@@ -9,12 +9,12 @@ COPY . .
 RUN mvn clean install -DskipTests
 
 # web projekt
-RUN mvn clean package -DskipTests -pl web -am
+RUN mvn clean package -DskipTests -pl web-starter -am
 
 # lightweight JDK image
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=builder /app/web/target/web-1.0-SNAPSHOT.jar app.jar
+COPY --from=builder /app/web-starter/target/web-starter-1.0-SNAPSHOT.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
 

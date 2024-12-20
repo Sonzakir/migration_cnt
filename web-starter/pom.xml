@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.fazli</groupId>
-  <artifactId>web</artifactId>
+  <artifactId>web-starter</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
