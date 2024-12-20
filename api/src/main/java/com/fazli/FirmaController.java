@@ -1,8 +1,6 @@
-package com.fazli.controller;
+package com.fazli;
 
 
-import com.fazli.Adresse;
-import com.fazli.FirmaService;
 import com.fazli.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
