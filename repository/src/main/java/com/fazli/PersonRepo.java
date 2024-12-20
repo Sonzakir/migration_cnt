@@ -1,5 +1,7 @@
 package com.fazli;
 
+import com.fazli.Adresse;
+import com.fazli.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

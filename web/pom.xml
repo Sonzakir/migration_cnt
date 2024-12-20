@@ -49,7 +49,14 @@
       <artifactId>model</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+    <!--REPO-->
+    <dependency>
+      <groupId>com.fazli</groupId>
+      <artifactId>repository</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
+
 
   <!--BUILD-->
   <build>

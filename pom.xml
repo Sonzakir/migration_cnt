@@ -9,10 +9,10 @@
 
   <!--CHILD POMS-->
   <modules>
-    <module>service</module>
+    <module>web</module>
     <module>model</module>
     <module>repository</module>
-    <module>web</module>
+    <module>service</module>
   </modules>
 
   <properties>
@@ -26,5 +26,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.4</version>
+    </dependency>
+
   </dependencies>
 </project>

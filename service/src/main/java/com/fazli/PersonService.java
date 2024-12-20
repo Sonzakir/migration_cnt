@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class PersonService {
 
     private final PersonRepo repository;
+
     private final EntityManager entityManager;
 
     private final AdresseMapper adresseMapper = new AdresseMapper();
