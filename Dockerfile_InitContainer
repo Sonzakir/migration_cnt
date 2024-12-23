@@ -38,8 +38,7 @@ RUN set -x && \
     curl -o /liquibase/lib/postgresql.jar https://repo1.maven.org/maven2/org/postgresql/postgresql/${POSTGRES_VERSION}/postgresql-${POSTGRES_VERSION}.jar
 
 COPY db-schema/changelog /liquibase/changelog
-#COPY web/src/main/resources/db-schema/changelog /liquibase/changelog
-#COPY src/main/resources/db-schema/changelog/sequences.sql /liquibase/changelog/sequences.sql
+
 
 ENTRYPOINT ["/entrypoint_InitContainer.sh"]
 
