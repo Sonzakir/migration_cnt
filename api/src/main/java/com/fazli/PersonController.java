@@ -197,6 +197,7 @@ public class PersonController {
     //Person Nachname Loeschen
     //{"nachname":"mayer"}
     @DeleteMapping("/delete/{id}/nachname")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void deleteNachname(@PathVariable Long id, @RequestBody String nachname) {
         logger.warn("Nachanme {} von der Person mit ID = {} wird gelöscht.", nachname, id);
         service.nachnameLoeschen(id, nachname);
