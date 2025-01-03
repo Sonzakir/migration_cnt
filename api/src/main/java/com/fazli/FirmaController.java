@@ -1,11 +1,14 @@
 package com.fazli;
 
 
+import com.fazli.aspect.LogEntryExit;
 import com.fazli.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -33,6 +36,7 @@ public class FirmaController {
 
 
     @PostMapping("")
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaHinzufuegen(@RequestBody FirmaRequestDTO firmaDTO) {
 
         logger.info("füge firma hinzu {}", firmaDTO);
@@ -45,6 +49,7 @@ public class FirmaController {
 
     // fügt Firma mit id eine Kontakt hinzu
     @PostMapping("/{id}/kontakt")
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO neueKontaktHinzufuegen(@PathVariable Long id , @RequestBody FirmaKontaktRequestDTO kontakt){
         logger.info("füge neue Kontakt {} für die Firma mit ID = {}",kontakt , id);
         return firmaService.neueKontaktHinzufuegen(id,kontakt);
@@ -52,6 +57,7 @@ public class FirmaController {
 
     // fügt Firma mit id eine Adressse hinzu
     @PostMapping("/{id}/adresse")
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO neueAdressHinzufuegen(@PathVariable Long id , @RequestBody AdresseRequestDTO adresseDTO){
         logger.info("füge neue Adresse {} für die Firma mit ID = {}" , adresseDTO , id);
         return firmaService.neueAdresseHinzufuegen(id,adresseDTO);
@@ -59,6 +65,7 @@ public class FirmaController {
 
 
     @PostMapping("/{id}/branche")
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO neueBrancheHinzufuegen(@PathVariable Long id , @RequestBody String branche){
         logger.info("füge neue Branche {} für die Firma mit ID = {}",branche , id);
         return firmaService.neueBrancheHinzufuegen(id,branche);
@@ -74,6 +81,7 @@ public class FirmaController {
 
 
     @GetMapping("")
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = false, dauer = ChronoUnit.MILLIS)
     public List<FirmaDTO> suche(
             @RequestParam(name="id",required = false) Long id,
             @RequestParam(name = "firmaname",required = false)String firmaname,
@@ -89,6 +97,7 @@ public class FirmaController {
 
     // liefert (alle) adressen [opt] firma id
     @GetMapping("/adresse")
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public List<AdresseDTO> adresseLiefern(@RequestParam(required = false)Long id){
         logger.info("Adressen von Firma mit ID = {} wird geliefert." , id);
         if(id==null){
@@ -100,6 +109,7 @@ public class FirmaController {
 
     // liefert (alle) firmakontakten [opt] person id
     @GetMapping("/kontakt")
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public List<FirmaKontaktDTO> firmaKontaktLiefern(@RequestParam(required = false)Long id){
         logger.info("Kontakten von Firma mit ID = {} wird geliefert." , id);
         if(id==null){
@@ -114,6 +124,7 @@ public class FirmaController {
 
     // ändert eine Firma mit id
     @PutMapping("/{id}")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaAendern(@PathVariable Long id ,  @RequestBody FirmaRequestDTO firmaDTO){
         logger.info("Firma mit ID = {} wird durch {} ersetzt." ,id, firmaDTO);
         return firmaService.firmaAendern(id, firmaDTO);
@@ -121,6 +132,7 @@ public class FirmaController {
 
     // ändert die Adresse mit aid von Firma mit firmaID=pid
     @PutMapping("/{pid}/adresse/{aid}")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaAdresseAendern(@PathVariable Long pid, @PathVariable Long aid ,
                                         @RequestBody AdresseRequestDTO adresseDTO){
         logger.info("Die Adresse mit ID = {} von der Firma ID = {} wird durch {} ersetzt.",
@@ -130,6 +142,7 @@ public class FirmaController {
 
     // ändert die Kontakt mit kid von Firma mit id
     @PutMapping("/{id}/kontakt/{kid}")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaKontaktAendern(@PathVariable Long id, @PathVariable Long kid,
                                         @RequestBody FirmaKontaktRequestDTO firmaKontaktDTO){
         logger.info("Der Kontakt mit ID = {} von der Firma mit ID = {} wird durch {} ersetzt." ,
@@ -148,6 +161,7 @@ public class FirmaController {
 
     // loesche (alle) Firma [opt] ID,stadt,bundesland
     @DeleteMapping("")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean loeschen(@RequestParam(required = false)Long id,
                             @RequestParam(required = false)String stadt,
                             @RequestParam(required = false) String bundesland){
@@ -165,6 +179,7 @@ public class FirmaController {
 
     // löscht die Adresse mit aid von Firma mit id
     @DeleteMapping("/{id}/adresse/{aid}")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean adresseEntfernen(@PathVariable Long id,
                                     @PathVariable Long aid){
         logger.warn("Die Adresse mit ID = {} von der Firma mit ID = {} wird gelöscht", aid, id);
@@ -172,6 +187,7 @@ public class FirmaController {
 
     // löscht die Kontakt mit kid von Firma mit id
     @DeleteMapping("/{id}/kontakt/{kid}")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean kontaktEntfernen(@PathVariable Long id,
                                     @PathVariable Long kid){
         logger.warn("Die Kontakt mit ID = {} von der Firma mit ID = {} wird gelöscht. ",kid, id);
@@ -191,6 +207,7 @@ public class FirmaController {
 
     // eine Festnetznummer Loeschen
     @DeleteMapping("/delete/{id}/festnetzNo")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void festnetzNoLoeschen(@PathVariable Long id , @RequestBody String festnetznummer) {
         logger.warn("Festnetznummer {} von der Firma mit ID = {} wird gelöscht.", festnetznummer, id);
         firmaService.festnetzNoLoeschen(id, festnetznummer);
@@ -199,6 +216,7 @@ public class FirmaController {
 
     //Person Email loeschen
     @DeleteMapping("/delete/{id}/email")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void emailLoeschen(@PathVariable Long id, @RequestBody String email) {
         logger.warn("Email {} von der Firma mit ID = {} wird gelöscht.", email, id);
         firmaService.emailLoeschen(id, email);
@@ -207,6 +225,7 @@ public class FirmaController {
 
     //Person webseite loeshcen
     @DeleteMapping("/delete/{id}/webseite")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void webseiteLoeschen(@PathVariable Long id, @RequestBody String webseite) {
         logger.warn("Webseite {} von der Firma mit ID = {} wird gelöscht.", webseite, id);
         firmaService.webseiteLoeschen(id, webseite);
@@ -214,6 +233,7 @@ public class FirmaController {
 
     //loesche eine Adresse
     @DeleteMapping("/delete/{id}/adresse")
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void adresseLoeschen(@PathVariable Long id,  @RequestBody Adresse adresse){
         logger.warn("Adressse {} von der Firma mit ID = {} wird gelöscht.", adresse, id);
         firmaService.adresseLoeschen(id,adresse);

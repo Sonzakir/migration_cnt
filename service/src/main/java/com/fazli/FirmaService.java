@@ -1,14 +1,18 @@
 package com.fazli;
 
 
+import com.fazli.aspect.LogEntryExit;
 import com.fazli.dto.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -45,6 +49,7 @@ public class FirmaService {
 
 
     // eine Firma Hinzufuegen
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaHinzufuegen(FirmaRequestDTO firmaDTO) {
         Firma f = firmaDtoMapper.toFirma(firmaDTO);
         logger.info("Die Firma RequestDTO  {} wird auf Firma gemapped {}" ,firmaDTO, f);
@@ -59,6 +64,7 @@ public class FirmaService {
 
     // fügt Firma mit id eine Adresse hinzu
     @Transactional
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO neueAdresseHinzufuegen(Long firmaID , AdresseRequestDTO adresseDTO){
         Adresse adresse = adresseMapper.toAdresse(adresseDTO);
         logger.info("Die Adresse RequestDTO {} wird auf Adresse gemapped {}" ,adresseDTO, adresse);
@@ -75,6 +81,7 @@ public class FirmaService {
 
     // fügt Firma mit der id eine neue Kontakt hinzu
     @Transactional
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO neueKontaktHinzufuegen(Long firmaID,FirmaKontaktRequestDTO firmaKontaktDTO){
         FirmaKontakt kontakt = firmaKontaktDTOMapper.toFirmaKontakt(firmaKontaktDTO);
         logger.info("Die Kontakt RequestDTO {} wird auf Kontakt {} gemapped " , firmaKontaktDTO , kontakt);
@@ -94,6 +101,7 @@ public class FirmaService {
     // fügt Firma mit der id eine neue Branche hinzu
     // BODY = > ANWALT (kein{},kein "")
     @Transactional
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO neueBrancheHinzufuegen(Long firmaID , String branche ){
         Firma firma =repository.findById(firmaID).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -119,7 +127,7 @@ public class FirmaService {
 
 
 
-
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = false, dauer = ChronoUnit.MILLIS)
     public List<FirmaDTO> suche (Long firmaID,
                                  String firmaname,
                                  String plz,
@@ -157,6 +165,7 @@ public class FirmaService {
 
 
     // liefert (alle) adressen [opt] firma id
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public List<AdresseDTO> adresseLiefern(Long firmaID){
         if(firmaID==null){
             logger.warn("Wenn keine ID angegeben wird, wird alle Adressen zurückgegeben");
@@ -171,6 +180,7 @@ public class FirmaService {
     }
 
     // liefert (alle) kontakten [opt] firma id
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public List<FirmaKontaktDTO> firmaKontaktLiefern(Long firmaID){
         if(firmaID==null){
             logger.warn("Wenn keine ID angegeben wird, wird alle gespeicherten Kontakten zurückgegeben");
@@ -192,6 +202,7 @@ public class FirmaService {
 
     //  ändert eine Firma mit der ID
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaAendern(Long personID, FirmaRequestDTO firmaDTO){
         Firma firma=repository.findById(personID).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         Firma neu = firmaDtoMapper.toFirma(firmaDTO);
@@ -227,6 +238,7 @@ public class FirmaService {
 
     // ändert die Adresse mit aid von Person mit pid
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaAdresseAendern(Long personID , Long adresseID,AdresseRequestDTO adresseDTO){
         Firma firma = repository.findById(personID).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Adresse adresse= adresseMapper.toAdresse(adresseDTO);
@@ -247,6 +259,7 @@ public class FirmaService {
 
     // ändert die Kontakt mit kid von Firma mit id
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public FirmaDTO firmaKontakAendern(Long personID , Long kontaktID  ,FirmaKontaktRequestDTO firmaKontaktDTO){
         Firma firma=repository.findById(personID).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         FirmaKontakt kontakt = firmaKontaktDTOMapper.toFirmaKontakt(firmaKontaktDTO);
@@ -271,6 +284,7 @@ public class FirmaService {
 
 
     //T loesche (alle) Firma [opt] ID,stadt,bundesland
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean firmaLoeschen(Long firmaID, String stadt, String bundesland){
         // ID vorhanden
         if(firmaID!=null){
@@ -291,6 +305,7 @@ public class FirmaService {
 
     // löscht die Adresse mit aid von Firma mit id
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean adresseEntfernen(Long firmaID , Long adresseID){
         Firma f = repository.findById(firmaID)
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -308,6 +323,7 @@ public class FirmaService {
 
     //  löscht die Kontakt mit kid von Person mit pid
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean kontaktEntfernen(Long firmaID, Long kontaktID){
         Firma f = repository.findById(firmaID)
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -329,6 +345,7 @@ public class FirmaService {
 
     // eine festneznummerLoeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void festnetzNoLoeschen(Long personID , String festnetz){
         Firma f = repository.findById(personID).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<FirmaKontakt> lst = f.getKontaktList();
@@ -343,6 +360,7 @@ public class FirmaService {
 
     // eine email loeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void emailLoeschen(Long personID ,String email){
         Firma f = repository.findById(personID).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<FirmaKontakt> lst = f.getKontaktList();
@@ -357,6 +375,7 @@ public class FirmaService {
 
     //eine webseite loeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void webseiteLoeschen(Long personID , String webseite){
         Firma p = repository.findById(personID).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<FirmaKontakt> lst = p.getKontaktList();
@@ -371,6 +390,7 @@ public class FirmaService {
 
     // loesche eine adresse
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void adresseLoeschen(Long personID , Adresse adresse){
         Firma f= repository.findById(personID).orElseThrow(()->new NoSuchElementException("Es gibt keine firma"));
         f.getAdresse().remove(adresse);

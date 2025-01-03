@@ -1,14 +1,17 @@
 package com.fazli;
 
+import com.fazli.aspect.LogEntryExit;
 import com.fazli.dto.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,7 +38,7 @@ public class PersonService {
 
 
 //                              Hinzufuegen
-
+    @LogEntryExit(showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public PersonDTO einePersonHinzufuegen(PersonRequestDTO personDTO) {
         Person person = personDTOMapper.ReqtoPerson(personDTO);
         logger.info("Die Person RequestDTO  {} wird auf Person gemapped {}" ,personDTO, person);
@@ -46,6 +49,7 @@ public class PersonService {
 
     // fügt Person mit id eine Adresse hinzu
     @Transactional
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public PersonDTO neueAdresseHinzufuegen(Long id , AdresseRequestDTO adresseDTO){
         Adresse adresse = adresseMapper.toAdresse(adresseDTO);
         logger.info("Die Adresse RequestDTO {} wird auf Adresse gemapped {}" ,adresseDTO, adresse);
@@ -65,6 +69,7 @@ public class PersonService {
 
     // fügt Person mit der id eine neue Kontakt hinzu
     @Transactional
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public PersonDTO neueKontaktHinzufuegen(Long id, PersonKontaktRequestDTO personKontaktDTO){
         PersonKontakt kontakt = personKontaktDTOMapper.toPersonKontakt(personKontaktDTO);
         logger.info("Die Kontakt RequestDTO {} wird auf Kontakt {} gemapped " , personKontaktDTO , kontakt);
@@ -92,6 +97,7 @@ public class PersonService {
 
     //                      Suchmethoden
     // generische suche
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = false, dauer = ChronoUnit.MILLIS)
     public List<PersonDTO> suche(Long id , String vorname, String nachname,
                                  String stadt, String bundesland){
         List<Person> lst;
@@ -116,6 +122,7 @@ public class PersonService {
 
     // liefert adresse [opt] id
     // http://localhost:8080/person/adresse ?id=302
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public List<AdresseDTO> adresseLiefern(Long id){
         logger.warn("Wenn keine ID angegeben wird, wird alle gespeichertem Adressen zurückgegeben");
         logger.info("Die Adressen der Person mit ID = {} wird zurückgegeben.", id);
@@ -134,6 +141,7 @@ public class PersonService {
     // A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance: com.fazli.Telefonbuch_Spring.model.Person.adresse
     //  ändert eine Person mit der ID
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public PersonDTO personAendern(Long id , PersonRequestDTO personDTO){
         Person person = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Person neu = personDTOMapper.ReqtoPerson(personDTO);
@@ -166,6 +174,7 @@ public class PersonService {
 
     // ändert die Adresse mit aid von Person mit pid
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public PersonDTO personAdresseAendern(Long pid , Long aid , AdresseRequestDTO adresseDTO){
         Person person = repository.findById(pid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         Adresse adresse= adresseMapper.toAdresse(adresseDTO);
@@ -189,6 +198,7 @@ public class PersonService {
 
     // ändert die Kontakt mit kid von Person mit id
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public PersonDTO personKontaktAendern(Long id, Long kid, PersonKontaktRequestDTO personKontaktDTO){
         Person person = repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         PersonKontakt kontakt = personKontaktDTOMapper.toPersonKontakt(personKontaktDTO);
@@ -211,6 +221,7 @@ public class PersonService {
 
 
     // generisches löschen
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean loeschen(Long id , String vorname, String nachname,
                             String stadt, String bundesland){
         if(id!=null){
@@ -232,6 +243,7 @@ public class PersonService {
 
     // löscht die Adresse mit aid von Person mit pid
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean adresseEntfernen(Long pid, Long aid){
         Person p = repository.findById(pid)
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -250,6 +262,7 @@ public class PersonService {
 
     //  löscht die Kontakt mit kid von Person mit pid
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public boolean kontaktEntfernen(Long pid, Long kid){
         Person p = repository.findById(pid)
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -272,7 +285,7 @@ public class PersonService {
 
 
 
-
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void loeshcePersonNachID(Long id) {
         Person p = repository.findById(id).
                 orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -285,6 +298,7 @@ public class PersonService {
 
     // eine Vorname loeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void vornameLoeschen(Long id ,  String vorname){
         Person p = repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         p.setVorname(vorname);
@@ -293,6 +307,7 @@ public class PersonService {
 
     // eine Nachname loeachen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void nachnameLoeschen(Long id ,  String nachname){
         Person p=repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         p.setNachname(nachname);
@@ -301,6 +316,7 @@ public class PersonService {
 
     // eine mobilnummer loeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void mobilNoLoeschen(Long id , String mobilnummer){
         Person p = repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<PersonKontakt> lst = p.getKontaktList();
@@ -317,6 +333,7 @@ public class PersonService {
 
     // eine festneznummerLoeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void festnetzNoLoeschen(Long id , String festnetz){
         Person p = repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<PersonKontakt> lst = p.getKontaktList();
@@ -331,6 +348,7 @@ public class PersonService {
 
     // eine email loeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void emailLoeschen(Long id , String email){
         Person p = repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<PersonKontakt> lst = p.getKontaktList();
@@ -345,6 +363,7 @@ public class PersonService {
 
     //eine webseite loeschen
     @Transactional
+    @LogEntryExit(level= LogLevel.WARN, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public void webseiteLoeschen(Long id , String webseite){
         Person p = repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
         List<PersonKontakt> lst = p.getKontaktList();
@@ -357,7 +376,7 @@ public class PersonService {
         entityManager.merge(p);
     }
 
-
+    @LogEntryExit(level= LogLevel.INFO, showArgs = true, showResult = true, dauer = ChronoUnit.MILLIS)
     public Long anzahlDerPersonen(){
         return repository.count();
     }
