@@ -3,25 +3,22 @@ package com.fazli.dto;
 
 import com.fazli.Adresse;
 import com.fazli.aspect.LogEntryExit;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 import org.springframework.boot.logging.LogLevel;
 
 import java.time.temporal.ChronoUnit;
 
-public class AdresseMapper {
+@Mapper(componentModel = "spring")
+public interface AdresseMapper {
+    AdresseMapper INSTANCE = Mappers.getMapper(AdresseMapper.class);
 
-    public AdresseDTO toDTO(Adresse adresse) {
-        return new AdresseDTO(adresse.getId(), adresse.getStrasse(),adresse.getHausNo() ,adresse.getPlz()
-                , adresse.getStadt(), adresse.getBundesland() );
-    }
+    AdresseDTO toDTO(Adresse adresse);
 
-    public Adresse toAdresse(AdresseDTO adresseDTO){
-        return new Adresse(adresseDTO.getId(), adresseDTO.getStrasse() ,adresseDTO.getHausNo() ,
-                adresseDTO.getPlz(), adresseDTO.getStadt() , adresseDTO.getBundesland());
-    }
+    Adresse toAdresse(AdresseDTO adresseDTO);
 
-    public Adresse toAdresse(AdresseRequestDTO adresseDTO){
-        return new Adresse(adresseDTO.getStrasse() ,adresseDTO.getHausNo() ,
-                adresseDTO.getPlz(), adresseDTO.getStadt() , adresseDTO.getBundesland());
-    }
-
+    Adresse toAdresse(AdresseRequestDTO adresseDTO);
 }
+

@@ -3,6 +3,7 @@ package com.fazli;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -48,6 +49,7 @@ public class Adresse {
         this.stadt = stadt;
         this.bundesland = bundesland;
     }
+
 
 
 

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FirmaDTOMapperTest {
 
-    private final AdresseMapper adresseMapper = new AdresseMapper();
+    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class); // Get the MapStruct implementation
     private final FirmaKontaktDTOMapper firmaKontaktDTOMapper = new FirmaKontaktDTOMapper();
     private final FirmaDTOMapper subject = new FirmaDTOMapper(adresseMapper , firmaKontaktDTOMapper);
 

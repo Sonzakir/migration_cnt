@@ -5,6 +5,7 @@ import com.fazli.aspect.LogEntryExit;
 import com.fazli.dto.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.logging.LogLevel;
@@ -27,7 +28,8 @@ public class FirmaService {
 
 
     private FirmaKontaktDTOMapper firmaKontaktDTOMapper = new FirmaKontaktDTOMapper();
-    private AdresseMapper adresseMapper = new AdresseMapper();
+//    private AdresseMapper adresseMapper = new AdresseMapper();
+    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class);
     private final FirmaDTOMapper firmaDtoMapper = new FirmaDTOMapper(adresseMapper,firmaKontaktDTOMapper);
 
     private final Logger logger  = LoggerFactory.getLogger(FirmaService.class);

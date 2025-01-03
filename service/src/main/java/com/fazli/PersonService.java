@@ -4,6 +4,7 @@ import com.fazli.aspect.LogEntryExit;
 import com.fazli.dto.*;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.logging.LogLevel;
@@ -23,7 +24,10 @@ public class PersonService {
 
     private final EntityManager entityManager;
 
-    private final AdresseMapper adresseMapper = new AdresseMapper();
+//    private final AdresseMapper adresseMapper = new AdresseMapper();
+    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class); // Get the MapStruct implementation
+
+
     private final PersonKontaktDTOMapper personKontaktDTOMapper = new PersonKontaktDTOMapper();
     private final PersonDTOMapper personDTOMapper = new PersonDTOMapper(adresseMapper, personKontaktDTOMapper);
 
