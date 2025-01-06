@@ -28,8 +28,8 @@ public class PersonService {
     private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class); // Get the MapStruct implementation
 
 
-    private final PersonKontaktDTOMapper personKontaktDTOMapper = new PersonKontaktDTOMapper();
-    private final PersonDTOMapper personDTOMapper = new PersonDTOMapper(adresseMapper, personKontaktDTOMapper);
+    private final PersonKontaktDTOMapper personKontaktDTOMapper = Mappers.getMapper(PersonKontaktDTOMapper.class);
+    private final PersonDTOMapper personDTOMapper = Mappers.getMapper(PersonDTOMapper.class);
 
     private final Logger logger = LoggerFactory.getLogger(PersonService.class);
 

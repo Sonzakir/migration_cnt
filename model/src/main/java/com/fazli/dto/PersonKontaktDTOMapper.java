@@ -2,36 +2,18 @@ package com.fazli.dto;
 
 
 import com.fazli.PersonKontakt;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-public class PersonKontaktDTOMapper  {
-
-
-    public PersonKontaktDTO toDTO(PersonKontakt personKontakt) {
-        return new PersonKontaktDTO(
-                personKontakt.getId(),
-                personKontakt.getFestnetzNummer(),
-                personKontakt.getEmail(),
-                personKontakt.getWebseite(),
-                personKontakt.getMobilNummern()
-        );
-    }
-
-    public PersonKontakt toPersonKontakt(PersonKontaktDTO personKontaktDTO) {
-        return new PersonKontakt(
-                personKontaktDTO.getId(),
-                personKontaktDTO.getFestnetznummer(),
-                personKontaktDTO.getEmail(),
-                personKontaktDTO.getWebseite(),
-                personKontaktDTO.getMobilnummern()
-        );
-    }
-
-    public PersonKontakt toPersonKontakt(PersonKontaktRequestDTO personKontaktDTO) {
-        return new PersonKontakt(
-                personKontaktDTO.getFestnetznummer(),
-                personKontaktDTO.getEmail(),
-                personKontaktDTO.getWebseite(),
-                personKontaktDTO.getMobilnummern()
-        );
-    }
+@Mapper
+public interface PersonKontaktDTOMapper {
+    @Mapping(source = "festnetzNummer", target = "festnetznummer")
+    @Mapping(target = "mobilnummern" , source = "mobilNummern")
+    PersonKontaktDTO toDTO(PersonKontakt personKontakt);
+    @Mapping(source = "festnetznummer" , target ="festnetznummer" )
+    @Mapping(source = "mobilnummern", target = "mobilNummern")
+    PersonKontakt toPersonKontakt(PersonKontaktDTO personKontaktDTO);
+    @Mapping(source = "festnetznummer" , target ="festnetznummer")
+    @Mapping(source = "mobilnummern" , target = "mobilNummern")
+    PersonKontakt toPersonKontakt(PersonKontaktRequestDTO personKontaktDTO);
 }

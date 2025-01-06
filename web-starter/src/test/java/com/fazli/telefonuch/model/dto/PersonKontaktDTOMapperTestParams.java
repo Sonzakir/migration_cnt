@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersonKontaktDTOMapperTestParams {
 
     // subject
-    PersonKontaktDTOMapper testSubject = new PersonKontaktDTOMapper();
+    PersonKontaktDTOMapper testSubject = Mappers.getMapper(PersonKontaktDTOMapper.class);
 
     static Stream<Arguments> boolean_PersonKontakt_PersonKontaktDTO_Provider() {
         //Basebuilder

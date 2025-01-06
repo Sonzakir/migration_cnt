@@ -22,9 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FirmaDTOMapperTest {
 
-    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class); // Get the MapStruct implementation
-    private final FirmaKontaktDTOMapper firmaKontaktDTOMapper = new FirmaKontaktDTOMapper();
-    private final FirmaDTOMapper subject = new FirmaDTOMapper(adresseMapper , firmaKontaktDTOMapper);
+    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class);
+    private final FirmaKontaktDTOMapper firmaKontaktDTOMapper = Mappers.getMapper(FirmaKontaktDTOMapper.class);
+    private final FirmaDTOMapper subject = Mappers.getMapper(FirmaDTOMapper.class);
 
 
 

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -19,7 +20,7 @@ class FirmaKontaktDTOMapperTest {
 
     // subject
 
-    FirmaKontaktDTOMapper subject = new FirmaKontaktDTOMapper();
+    FirmaKontaktDTOMapper subject = Mappers.getMapper(FirmaKontaktDTOMapper.class);
 
 
     //    FirmaKontakt -> FirmaKontaktDTO

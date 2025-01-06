@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PersonDTOMapperTest {
 
-    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class); // Get the MapStruct implementation
-    PersonKontaktDTOMapper personKontaktDTOMapper = new PersonKontaktDTOMapper();
+    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class);
+    PersonKontaktDTOMapper personKontaktDTOMapper =Mappers.getMapper(PersonKontaktDTOMapper.class);
 
     // subject
-    PersonDTOMapper subject = new PersonDTOMapper(adresseMapper, personKontaktDTOMapper);
+    PersonDTOMapper subject = Mappers.getMapper(PersonDTOMapper.class);
 
     static Stream<Arguments> boolean_Person_PersonDTO_Provider(){
 

@@ -27,10 +27,9 @@ public class FirmaService {
 
 
 
-    private FirmaKontaktDTOMapper firmaKontaktDTOMapper = new FirmaKontaktDTOMapper();
-//    private AdresseMapper adresseMapper = new AdresseMapper();
+    private FirmaKontaktDTOMapper firmaKontaktDTOMapper = Mappers.getMapper(FirmaKontaktDTOMapper.class);
     private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class);
-    private final FirmaDTOMapper firmaDtoMapper = new FirmaDTOMapper(adresseMapper,firmaKontaktDTOMapper);
+    private final FirmaDTOMapper firmaDtoMapper = Mappers.getMapper(FirmaDTOMapper.class);
 
     private final Logger logger  = LoggerFactory.getLogger(FirmaService.class);
 
