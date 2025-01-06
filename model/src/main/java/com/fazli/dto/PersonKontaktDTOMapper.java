@@ -10,10 +10,10 @@ public interface PersonKontaktDTOMapper {
     @Mapping(source = "festnetzNummer", target = "festnetznummer")
     @Mapping(target = "mobilnummern" , source = "mobilNummern")
     PersonKontaktDTO toDTO(PersonKontakt personKontakt);
-    @Mapping(source = "festnetznummer" , target ="festnetznummer" )
+
     @Mapping(source = "mobilnummern", target = "mobilNummern")
     PersonKontakt toPersonKontakt(PersonKontaktDTO personKontaktDTO);
-    @Mapping(source = "festnetznummer" , target ="festnetznummer")
+
     @Mapping(source = "mobilnummern" , target = "mobilNummern")
     PersonKontakt toPersonKontakt(PersonKontaktRequestDTO personKontaktDTO);
 }

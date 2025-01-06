@@ -11,7 +11,7 @@ import org.springframework.boot.logging.LogLevel;
 
 import java.time.temporal.ChronoUnit;
 
-@Mapper()
+@Mapper
 public interface AdresseMapper {
     AdresseMapper INSTANCE = Mappers.getMapper(AdresseMapper.class);
 

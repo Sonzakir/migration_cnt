@@ -15,22 +15,16 @@ import java.util.stream.Collectors;
 @Mapper( uses = {AdresseMapper.class, FirmaKontaktDTOMapper.class})
 public interface FirmaDTOMapper {
 
-    @Mapping(target = "branche", source = "branchen", qualifiedByName = "brancheToStringList")
+    @Mapping(target = "branche", source = "branchen")
     FirmaDTO toDTO(Firma firma);
 
-    @Mapping(target = "branchen", source = "branche", qualifiedByName = "stringListToBranche")
+    @Mapping(target = "branchen", source = "branche" )
     Firma toFirma(FirmaDTO firmaDTO);
 
-    @Mapping(target = "branchen", source = "branche", qualifiedByName = "stringListToBranche")
+    @Mapping(target = "branchen", source = "branche")
     Firma toFirma(FirmaRequestDTO firmaRequestDTO);
 
-    @Named("brancheToStringList")
-    static List<String> brancheToStringList(List<Branche> branchen) {
-        return branchen.stream().map(Branche::name).collect(Collectors.toList());
-    }
+    String map (Branche branche);
+    Branche map (String s);
 
-    @Named("stringListToBranche")
-    static List<Branche> stringListToBranche(List<String> branche) {
-        return branche.stream().map(s -> Branche.valueOf(s.toUpperCase())).collect(Collectors.toList());
-    }
 }
