@@ -22,6 +22,7 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -86,12 +87,7 @@
           </annotationProcessorPaths>
         </configuration>
       </plugin>
-
     </plugins>
-
-
-
   </build>
-
 
 </project>

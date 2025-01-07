@@ -11,7 +11,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.3.4</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <relativePath/>
   </parent>
 
   <!--CHILD POMS-->
@@ -41,13 +41,6 @@
         <scope>test</scope>
       </dependency>
 
-      <!--SPRING BOOT STARTER WEB -->
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-        <version>3.3.4</version>
-      </dependency>
-
       <!-- AspectJ Weaver -->
       <dependency>
         <groupId>org.aspectj</groupId>
@@ -63,7 +56,6 @@
       </dependency>
 
     </dependencies>
-
 
   </dependencyManagement>
 

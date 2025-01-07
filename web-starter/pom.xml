@@ -21,19 +21,6 @@
   </properties>
 
   <dependencies>
-
-  <!--Spring Boot Web starter dependency-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <!--postgresql -->
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.7.4</version>
-    </dependency>
-
     <!--SERVICE-->
     <dependency>
       <groupId>com.fazli</groupId>
@@ -54,9 +41,23 @@
     </dependency>
     <!--API-->
     <dependency>
-        <groupId>com.fazli</groupId>
-        <artifactId>api</artifactId>
-        <version>1.0-SNAPSHOT</version>
+      <groupId>com.fazli</groupId>
+      <artifactId>api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <!--postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.4</version>
+    </dependency>
+
+
+    <!--Spring Boot Web starter dependency-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
     <dependency>
@@ -87,13 +88,12 @@
     </dependency>
 
       <!--lombok -->
-      <dependency>
-          <groupId>org.projectlombok</groupId>
-          <artifactId>lombok</artifactId>
-          <version>1.18.34</version>
-          <scope>provided</scope>
-      </dependency>
-
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.34</version>
+        <scope>provided</scope>
+    </dependency>
 
   </dependencies>
 
@@ -107,5 +107,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
