@@ -13,7 +13,6 @@ import java.time.temporal.ChronoUnit;
 
 @Mapper
 public interface AdresseMapper {
-    AdresseMapper INSTANCE = Mappers.getMapper(AdresseMapper.class);
 
     AdresseDTO toDTO(Adresse adresse);
 

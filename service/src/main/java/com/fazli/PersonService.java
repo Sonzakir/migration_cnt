@@ -24,11 +24,10 @@ public class PersonService {
 
     private final EntityManager entityManager;
 
-//    private final AdresseMapper adresseMapper = new AdresseMapper();
-    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class); // Get the MapStruct implementation
 
 
     private final PersonKontaktDTOMapper personKontaktDTOMapper = Mappers.getMapper(PersonKontaktDTOMapper.class);
+    private final AdresseMapper adresseMapper = Mappers.getMapper(AdresseMapper.class);
     private final PersonDTOMapper personDTOMapper = Mappers.getMapper(PersonDTOMapper.class);
 
     private final Logger logger = LoggerFactory.getLogger(PersonService.class);

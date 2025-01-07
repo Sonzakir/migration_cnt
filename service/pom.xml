@@ -9,14 +9,15 @@
 
   <!--PARENT-->
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.4</version>
-    <relativePath/>
+    <groupId>com.fazli</groupId>
+    <artifactId>telefonbuch</artifactId>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>17</java.version>
+
   </properties>
 
   <dependencies>
@@ -26,16 +27,14 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
+
     <!--REPO-->
     <dependency>
       <groupId>com.fazli</groupId>
       <artifactId>repository</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+
     <!--MODEL-->
     <dependency>
       <groupId>com.fazli</groupId>
@@ -47,6 +46,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
+
     <dependency>    <!--Für HTTPResponses-->
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
@@ -58,6 +58,7 @@
       <version>3.3.4</version>
       <scope>compile</scope>
     </dependency>
+
 
 
   </dependencies>
